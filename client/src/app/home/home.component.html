@@ -1,0 +1,21 @@
+<div class="container">
+    <div class="row" *ngIf="!registerMode">
+        <div class="col-12">
+        <h1>x</h1>
+        <p>
+            Buy Me a Coffee is a simple, meaningful way to fund your creative work.
+            Without stitching together a bunch of apps like Patreon, Mailchimp, and a donate button — you can accept support, memberships, and build a direct relationship with your fans.
+        </p>
+        <p>Your fans are going to love it.</p>
+        <button class="btn btn-primary" (click)="toggleRegister()">Register</button>
+        </div>
+    </div>
+
+    <div class="row row justify-content-md-center" *ngIf="registerMode">
+        <div class="col-4">
+            <app-register (cancelRegister)="cancelRegisterMode($event)"></app-register>
+        </div>
+    </div>
+
+    
+</div>

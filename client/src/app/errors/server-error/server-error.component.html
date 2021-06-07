@@ -1,0 +1,10 @@
+<div class="container">
+    <h3>Internal Server Error</h3>
+    <ng-container *ngIf="error">
+        <p>Status Code: {{ error.statusCode }}</p>
+        <p>{{ error.message }}</p>
+        <p class="p-3 bg-light text-danger">{{ error.details }}</p>
+    </ng-container>
+    
+    <button class="btn btn-primary" routerLink="/">Back to homepage </button>
+</div>
