@@ -1,0 +1,39 @@
+using System.Security.Cryptography;
+using System.Text;
+using System.Threading.Tasks;
+using API.Data;
+using API.DTOs;
+using API.Entities;
+using API.Interfaces;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System.Text.Json;
+using System.Collections.Generic;
+using Microsoft.Extensions.DependencyInjection;
+
+
+namespace API.Data
+{
+    public class Seed
+    {
+        public static async Task SeedUsers(DataContext context)
+        {
+            if (await context.Users.AnyAsync()) return;
+            var userData = await System.IO.File.ReadAllTextAsync("Data/UserSeedData.json");
+
+            var users = JsonSerializer.Deserialize<List<AppUser>>(userData);
+
+            foreach (var user in users)
+            {
+                using var hmac = new HMACSHA512();
+                user.UserName = user.UserName.ToLower();
+                user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes("password"));
+                user.PasswordSalt = hmac.Key;
+
+                context.Users.Add(user);
+            }
+
+            await context.SaveChangesAsync();
+        }
+    }
+}

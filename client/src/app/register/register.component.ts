@@ -11,7 +11,6 @@ import { AccountService } from '../_services/account.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  @Input() coinsFromHome: any;
   @Output() cancelRegister  = new EventEmitter();
   
   model: any = {};
