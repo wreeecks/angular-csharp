@@ -1,16 +1,24 @@
-<form (ngSubmit)="register()" #form="ngForm" autocomplete="off">
+<form [formGroup]='registrationForm' (ngSubmit)="register()" autocomplete="off">
     <h2 class="text-center">Sign up</h2>
     <hr>
     <div class="form-group">
-        <input type="text" class="form-control" name="username" [(ngModel)]="model.username" placeholder="Username">
+        <label for="gender" class="control-label mr-3">Gender</label>
+        <label class="radio-inline mr-1">
+            <input type="radio" name="gender" value="male" formControlName='gender' class=" mr-2"> Male
+        </label>
+        <label class="radio-inline mr-1">
+            <input type="radio" name="gender" value="female" formControlName='gender' class=" mr-2"> Female
+        </label>
     </div>
-    <div class="form-group">
-        <input type="password" class="form-control" name="password" [(ngModel)]="model.password" placeholder="Password">
-    </div>
-    <div class="form-group">
-        <button class="btn btn-success mr-2" (click)="register()">Register</button>
-        <button class="btn btn-danger mr-2" (click)="cancel()">Cancel</button>
-    </div>
+    <app-text-input [formControl]='registrationForm.controls["username"]' [label]='"username"'></app-text-input>
+    <app-text-input [formControl]='registrationForm.controls["password"]' [label]='"password"' [type]='"password"'></app-text-input>
+    <app-text-input [formControl]='registrationForm.controls["confirmPassword"]' [label]='"confirm password"' [type]='"password"'></app-text-input>
+   
+    <app-text-input [formControl]='registrationForm.controls["knownAs"]' [label]='"knownAs"'></app-text-input>
+    <app-date-input [formControl]='registrationForm.controls["dateOfBirth"]' [label]='"Date of Birth"' [maxDate]='maxDate' ></app-date-input>
+    <app-text-input [formControl]='registrationForm.controls["city"]' [label]='"city"'></app-text-input>
+    <app-text-input [formControl]='registrationForm.controls["country"]' [label]='"country"'></app-text-input>
+   
     <ng-container *ngIf="registrationErrors.length > 0">
         <ul>
             <li *ngFor="let error of registrationErrors">
@@ -18,4 +26,10 @@
             </li>
         </ul>
     </ng-container>
+   
+    <div class="form-group">
+        <button [disabled]='registrationForm.invalid' class="btn btn-success mr-2">Register</button>
+        <button class="btn btn-danger mr-2" (click)="cancel()">Cancel</button>
+    </div>
+    
 </form>
