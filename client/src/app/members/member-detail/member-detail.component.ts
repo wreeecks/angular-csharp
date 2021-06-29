@@ -38,7 +38,6 @@ export class MemberDetailComponent implements OnInit {
       .getMember(this.route.snapshot.paramMap.get('username') ?? '')
       .subscribe( member => { 
         this.member = member;
-        console.log('member', member)
         this.galleryImages = this.getImages();
       });
   }
@@ -53,7 +52,6 @@ export class MemberDetailComponent implements OnInit {
         big: photo?.url
       });
     }
-    console.log('imageUrls',imageUrls)
     return imageUrls;
   }
 

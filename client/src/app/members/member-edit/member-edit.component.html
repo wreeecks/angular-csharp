@@ -21,11 +21,11 @@
                 </div>
                 <div>
                     <strong>Member since:</strong>
-                    <p>{{ member.created }}</p>
+                    <p>{{ member.created  | date: 'dd MMMM YYYY' }}</p>
                 </div>
                 <div>
                     <strong>Last active:</strong>
-                    <p>{{ member.lastActive }}</p>
+                    <p>{{ member.lastActive  | timeago }}</p>
                 </div>
             </div>
             <div class="card-footer">
@@ -49,6 +49,16 @@
                         <input type="text" [(ngModel)]="member.city"  name="city" class="form-control mx-2">
                         <label for="city">Country</label>
                         <input type="text" [(ngModel)]="member.country"  name="country" class="form-control mx-2">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="gender" class="control-label mr-3">Gender</label>
+                        <label class="radio-inline mr-1">
+                            <input type="radio" name="gender" value="male" [(ngModel)]="member.gender"  class=" mr-2"> Male
+                        </label>
+                        <label class="radio-inline mr-1">
+                            <input type="radio" name="gender" value="female" [(ngModel)]="member.gender"  class=" mr-2"> Female
+                        </label>
                     </div>
                 </form>
                 
